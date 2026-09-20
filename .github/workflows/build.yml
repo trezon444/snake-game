@@ -1,0 +1,49 @@
+name: Build Snake Game
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get project
+        uses: actions/checkout@v4
+
+      - name: Get J2ME build environment
+        run: |
+          git clone https://github.com/retro-systems-lab/j2me-devkit.git j2me-devkit
+
+      - name: Copy Snake source
+        run: |
+          cp src/MainMIDlet.java j2me-devkit/src/MainMIDlet.java
+
+      - name: Set Snake game information
+        working-directory: j2me-devkit
+        run: |
+          sed -i 's/^MIDlet-Name:.*/MIDlet-Name: Snake Game/' app.jad
+          sed -i 's/^MIDlet-Vendor:.*/MIDlet-Vendor: DAVECREATOR/' app.jad
+          sed -i 's/^MIDlet-1:.*/MIDlet-1: Snake Game,,MainMIDlet/' app.jad
+          sed -i 's/^MIDlet-Description:.*/MIDlet-Description: MADE BY DAVECREATOR/' app.jad
+
+      - name: Build Snake Game
+        working-directory: j2me-devkit
+        run: |
+          make setup
+          make build
+
+      - name: Prepare download files
+        run: |
+          cp j2me-devkit/dist/app.jar Snake.jar
+          cp j2me-devkit/app.jad Snake.jad
+
+      - name: Upload Snake JAR and JAD
+        uses: actions/upload-artifact@v4
+        with:
+          name: Snake-Game
+          path: |
+            Snake.jar
+            Snake.jad
