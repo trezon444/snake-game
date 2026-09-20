@@ -19,7 +19,7 @@ jobs:
 
       - name: Copy Snake source
         run: |
-          cp src/Snake.java j2me-devkit/src/MainMIDlet.java
+          cp src/Snake.java j2me-devkit/src/Snake.java
 
       - name: Build J2ME game
         working-directory: j2me-devkit
