@@ -1,0 +1,10 @@
+MIDlet-Name: Snake Game
+MIDlet-Version: 1.0
+MIDlet-Vendor: DAVECREATOR
+MIDlet-1: Snake Game,,MainMIDlet
+MIDlet-Description: MADE BY DAVECREATOR
+X-Source-Repo: github.com/AbhyasKanaujia/j2me-boilerplate
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Jar-URL: dist/app.jar
+MIDlet-Jar-Size: 3378
