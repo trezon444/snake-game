@@ -1,5 +1,8 @@
 name: Build Snake Game
 
+permissions:
+  contents: write
+
 on:
   push:
     branches:
@@ -40,10 +43,18 @@ jobs:
           cp j2me-devkit/dist/app.jar Snake.jar
           cp j2me-devkit/app.jad Snake.jad
 
-      - name: Upload Snake JAR and JAD
+            - name: Upload Snake JAR and JAD
         uses: actions/upload-artifact@v4
         with:
           name: Snake-Game
           path: |
             Snake.jar
             Snake.jad
+
+      - name: Publish game files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Snake.jar Snake.jad
+          git diff --cached --quiet || git commit -m "Add Snake game files"
+          git push
