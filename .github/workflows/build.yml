@@ -43,7 +43,7 @@ jobs:
           cp j2me-devkit/dist/app.jar Snake.jar
           cp j2me-devkit/app.jad Snake.jad
 
-            - name: Upload Snake JAR and JAD
+      - name: Upload Snake JAR and JAD
         uses: actions/upload-artifact@v4
         with:
           name: Snake-Game
